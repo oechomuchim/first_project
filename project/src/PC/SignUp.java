@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.SimpleTimeZone;
 import java.awt.event.ActionEvent;
 
 public class SignUp {
@@ -56,6 +57,10 @@ public class SignUp {
 		idCheckLabel.setBounds(361, 69, 97, 23);
 		f.getContentPane().add(idCheckLabel);
 		
+		if(dao.IdCheck().equals(idTextField.getText())) {
+			System.out.println("중복!");
+//			idTextField.setText(null); // 텍스트창 비우기
+		} 
 
 		// 비밀번호 입력
 		JLabel pwLabel = new JLabel("*비밀번호");
@@ -79,6 +84,8 @@ public class SignUp {
 		} else{
 			pwTextField2.setForeground(new Color(0, 0, 0));
 		} 
+		
+
 		
 		pwLabel2.setBounds(32, 156, 105, 40);
 		pwTextField2.setBounds(136, 161, 214, 31);
@@ -135,16 +142,16 @@ public class SignUp {
 					  String tel = telTextField.getText();
 					  String birth = birthTextField.getText();
 					  String name = nameTextField.getText();
-					  //Time count = countTextField.getText();  gettext를 텍스트로 안받고 time클래스로,,, ㅠ
 					          
 					  dto.setId(id);
 					  dto.setPw(pw);
 					  dto.setTel(tel);
 					  dto.setBirth(birth);
 					  dto.setName(name);
-					  //dto.setCount(count);
 					  
 					  dao.insert(dto);
+					  
+					  System.out.println("가입 완료");
 			 }
 		});
 		completeBtn.setBounds(193, 402, 97, 23);
@@ -157,11 +164,11 @@ public class SignUp {
 		
 		
 		f.setVisible(true);
-	}
+	} // memberjoin
 	
 	public static void main(String[] args) {
 		SignUp signUp = new SignUp();
 		
 		signUp.MemberJoin();
 	}
-}
+} // class
