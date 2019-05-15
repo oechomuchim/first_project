@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 
 public class PcMain {
 	SeatDTO dto = new SeatDTO();
+	int price;
 
 	public PcMain() {
 		// 프레임
@@ -45,30 +46,92 @@ public class PcMain {
 		
 		// 가격 버튼
 		JButton pricebtn1 = new JButton("1000");
+		pricebtn1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				price = 1000;
+			}
+		});
 		f.getContentPane().add(pricebtn1);
 		JButton pricebtn2 = new JButton("2000");
+		pricebtn2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				price = 2000;
+			}
+		});
 		f.getContentPane().add(pricebtn2);
 		JButton pricebtn3 = new JButton("3000");
+		pricebtn3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				price = 3000;
+			}
+		});
 		f.getContentPane().add(pricebtn3);
 		JButton pricebtn4 = new JButton("4000");
+		pricebtn4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				price = 4000;
+			}
+		});
 		f.getContentPane().add(pricebtn4);
 		JButton pricebtn5 = new JButton("5000");
+		pricebtn5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				price = 5000;
+			}
+		});
 		f.getContentPane().add(pricebtn5);
 		JButton pricebtn6 = new JButton("10000");
+		pricebtn6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				price = 10000;
+			}
+		});
 		f.getContentPane().add(pricebtn6);
 		JButton pricebtn7 = new JButton("15000");
+		pricebtn7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				price = 15000;
+			}
+		});
 		f.getContentPane().add(pricebtn7);
 		JButton pricebtn8 = new JButton("20000");
+		pricebtn8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				price = 20000;
+			}
+		});
 		f.getContentPane().add(pricebtn8);
+		
+		
 		
 		// 결제 수단 버튼
 		JButton seatViewerBtn = new JButton("좌석 보기");
 		f.getContentPane().add(seatViewerBtn);
+		
 		JButton memberJoinBtn = new JButton("회원 가입");
+		memberJoinBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				SignUp signUp = new SignUp();
+				signUp.MemberJoin();
+			}
+		});
 		f.getContentPane().add(memberJoinBtn);
 		JButton cardBtn = new JButton("카드 결제");
+		cardBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SignUp signUp = new SignUp();
+				signUp.CardPayment();
+			}
+		});
 		f.getContentPane().add(cardBtn);
 		JButton cashBtn = new JButton("현금 결제");
+		cashBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SignUp signUp = new SignUp();
+				signUp.CashPayment();
+				price=0;
+			}
+		});
 		f.getContentPane().add(cashBtn);
 		JButton changeBtn = new JButton("잔돈 반환");
 		f.getContentPane().add(changeBtn);
