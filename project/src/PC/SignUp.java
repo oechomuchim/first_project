@@ -1,90 +1,27 @@
 package PC;
 
-import java.awt.FlowLayout;
-import javax.swing.*;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
-
-import java.awt.Font;
 import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.sql.Time;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.SimpleTimeZone;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 public class SignUp {
 	/**
 	 * @wbp.parser.entryPoint
 	 */
+	static PcMain pc = new PcMain();
 	
-	// 현금 결제
-	public void CashPayment() {
-		JFrame f = new JFrame();
-		FlowLayout flow = new FlowLayout();
-
-		PcDAO dao = new PcDAO();
-		PcDTO dto = new PcDTO();
-		PcMain pc = new PcMain();
-
-		JLabel cashPaymentLabel = new JLabel("현금 결제");
-		cashPaymentLabel.setFont(new Font("굴림", Font.PLAIN, 18));
-		cashPaymentLabel.setBounds(155, 10, 125, 31);
-		f.getContentPane().add(cashPaymentLabel);
-
-		// 선택 금액
-		JLabel selectCashLabel = new JLabel(Integer.toString(pc.price));
-		f.getContentPane().add(selectCashLabel);
-		
-		//PcMain pcMain = new PcMain();
-
-		selectCashLabel.setBounds(36, 60, 69, 40);
-
-		// 투입 금액
-		JLabel insertCashLabel = new JLabel("투입 금액");
-		f.getContentPane().add(insertCashLabel);
-		
-		String[] cashType = { "1000", "2000", "3000", "4000", "5000", "10000", "20000" };
-		JComboBox comboBox = new JComboBox(cashType);
-		f.getContentPane().add(comboBox);
-		
-		String a = null;
-		int b = 0;
-		
-		for (int i = 0; i < cashType.length; i++) {
-			a = cashType[i];
-			b = Integer.parseInt(a);
-		}
-		
-
-		comboBox.setBounds(117, 127, 103, 21);
-		insertCashLabel.setBounds(36, 126, 69, 23);
-
-		// 거스름돈
-		JLabel cashChangeLabel = new JLabel("유효 기간");
-		f.getContentPane().add(cashChangeLabel);
-
-		//int result = b-
-				
-		cashChangeLabel.setBounds(36, 179, 69, 31);
-
-		// 결제 완료
-		JButton completeBtn = new JButton("결제");
-		completeBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "결제가 완료되었습니다");
-			}
-		});
-		completeBtn.setBounds(149, 248, 97, 23);
-		f.getContentPane().add(completeBtn);
-
-		// 프레임 옵션
-		f.setTitle("카드 결제");
-		f.setSize(421, 331);
-		f.getContentPane().setLayout(null);
-		
-		f.setVisible(true);
-	}
+	// 비회원 
+	
 	
 	
 	// 카드 결제
@@ -107,6 +44,7 @@ public class SignUp {
 		String[] cardType = { "신한은행", "우리은행", "국민은행", "기업은행", "농협은행", "케이뱅크", "카카오뱅크" };
 		JComboBox comboBox = new JComboBox(cardType);
 		f.getContentPane().add(comboBox);
+		
 
 		comboBox.setBounds(104, 70, 103, 21);
 		idLabel.setBounds(36, 60, 69, 40);
@@ -214,6 +152,7 @@ public class SignUp {
 		completeBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "결제가 완료되었습니다");
+				f.dispose();
 			}
 		});
 		completeBtn.setBounds(193, 402, 97, 23);
@@ -229,7 +168,7 @@ public class SignUp {
 	}
 	
 	
-	// 회원가입
+	 //회원가입
 	public void MemberJoin() {
 		JFrame f = new JFrame();
 		JButton signUp = new JButton();
@@ -343,6 +282,8 @@ public class SignUp {
 				dao.insert(dto);
 				
 				JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다");
+
+				f.dispose();
 			}
 		});
 		completeBtn.setBounds(193, 402, 97, 23);
@@ -361,6 +302,5 @@ public class SignUp {
 
 		signUp.MemberJoin();
 		signUp.CardPayment();
-		signUp.CashPayment();
 	}
 } // class

@@ -1,107 +1,115 @@
 package PC;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JRadioButton;
 import javax.swing.JToggleButton;
-import javax.swing.JPanel;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class PcMain {
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.ButtonGroup;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+// 비회원 눌렀을 때
+public class PcMain2 {
 	SeatDTO dto = new SeatDTO();
 	int price;
-	static SignUp signUp = new SignUp();
-	CashPayment cashPayment = new CashPayment();
+	static CashPayment cashPayment = new CashPayment();
 	
-	public PcMain() {
+	
+	public PcMain2() {
 		// 프레임
 		JFrame f = new JFrame();
+		Color green = new Color(120,255,0);
 		
 		// 회원 비회원 버튼
 		JToggleButton membtn = new JToggleButton("회 원");
 		f.getContentPane().add(membtn);
-		membtn.setSelected(true); // 처음에 on
 		
 		JToggleButton nonmembtn = new JToggleButton("비회원");
 		f.getContentPane().add(nonmembtn);
+		nonmembtn.setSelected(true); // 처음에 on
 		
 		nonmembtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent args0) {
 				membtn.setSelected(false);
-				PcMain2 pcMain2 = new PcMain2();
-				f.dispose();
 			}
 		});
 		membtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent args0) {
 				nonmembtn.setSelected(false);
+				PcMain pcMain2 = new PcMain();
+				f.dispose();
 			}
 		});
 		
 		// 가격 버튼
-		JToggleButton pricebtn1 = new JToggleButton("1000");
+		JToggleButton pricebtn1 = new JToggleButton("1200");
 		pricebtn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pricebtn1.setSelected(true);
-				price = 1000;
+				price = 1200;
 			}
 		});
 		f.getContentPane().add(pricebtn1);
-		JToggleButton pricebtn2 = new JToggleButton("2000");
+		JToggleButton pricebtn2 = new JToggleButton("2200");
 		pricebtn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pricebtn2.setSelected(true);
-				price = 2000;
+				price = 2200;
 			}
 		});
 		f.getContentPane().add(pricebtn2);
-		JToggleButton pricebtn3 = new JToggleButton("3000");
+		JToggleButton pricebtn3 = new JToggleButton("3200");
 		pricebtn3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pricebtn3.setSelected(true);
-				price = 3000;
+				price = 3200;
 			}
 		});
 		f.getContentPane().add(pricebtn3);
-		JToggleButton pricebtn4 = new JToggleButton("4000");
+		JToggleButton pricebtn4 = new JToggleButton("4200");
 		pricebtn4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pricebtn4.setSelected(true);
-				price = 4000;
+				price = 4200;
 			}
 		});
 		f.getContentPane().add(pricebtn4);
-		JToggleButton pricebtn5 = new JToggleButton("5000");
+		JToggleButton pricebtn5 = new JToggleButton("5200");
 		pricebtn5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pricebtn5.setSelected(true);
-				price = 5000;
+				price = 5200;
 			}
 		});
 		f.getContentPane().add(pricebtn5);
-		JToggleButton pricebtn6 = new JToggleButton("10000");
+		JToggleButton pricebtn6 = new JToggleButton("10200");
 		pricebtn6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pricebtn6.setSelected(true);
-				price = 10000;
+				price = 10200;
 			}
 		});
 		f.getContentPane().add(pricebtn6);
-		JToggleButton pricebtn7 = new JToggleButton("15000");
+		JToggleButton pricebtn7 = new JToggleButton("15200");
 		pricebtn7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pricebtn7.setSelected(true);
-				price = 15000;
+				price = 15200;
 			}
 		});
 		f.getContentPane().add(pricebtn7);
-		JToggleButton pricebtn8 = new JToggleButton("20000");
+		JToggleButton pricebtn8 = new JToggleButton("20200");
 		pricebtn8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pricebtn8.setSelected(true);
-				price = 20000;
+				price = 20200;
 			}
 		});
 		f.getContentPane().add(pricebtn8);
@@ -116,6 +124,7 @@ public class PcMain {
 		JButton memberJoinBtn = new JButton("회원 가입");
 		memberJoinBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				SignUp signUp = new SignUp();
 				signUp.MemberJoin();
 			}
 		});
@@ -123,6 +132,7 @@ public class PcMain {
 		JButton cardBtn = new JButton("카드 결제");
 		cardBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				SignUp signUp = new SignUp();
 				signUp.CardPayment();
 			}
 		});
@@ -130,9 +140,11 @@ public class PcMain {
 		JButton cashBtn = new JButton("현금 결제");
 		cashBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cashPayment.MemberCashPayment();
+				SignUp signUp = new SignUp();
+				cashPayment.NonMemberCashPayment();
 //				price=0; 
-			}                
+				f.dispose();
+			}
 		});
 		f.getContentPane().add(cashBtn);
 		JButton changeBtn = new JButton("잔돈 반환");
@@ -206,7 +218,7 @@ public class PcMain {
 //	}
 
 	public static void main(String[] args) {
-		PcMain pc = new PcMain();
+		PcMain2 pc = new PcMain2();
 //		SignUp dao = new SignUp();
 		
 //		dao.MemberJoin();
