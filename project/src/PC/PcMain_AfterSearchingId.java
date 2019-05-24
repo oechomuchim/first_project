@@ -1,6 +1,7 @@
 package PC;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -10,36 +11,31 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
+import javax.swing.SwingConstants;
 import javax.swing.JPanel;
 
-public class PcMain {
+public class PcMain_AfterSearchingId {
 	static SeatDTO dto = new SeatDTO();
-	public static int price;
+	PcMain pc = new PcMain();
+	int price = pc.price;
 	static JFrame f = new JFrame();
 	static ArrayList list = new ArrayList();
-	static SearchingId searchingId;
-
-	public void PcMain() {
+	static CashPayment cash;
+	static int cashh;
+	
+	
+	public void PcMain_AfterSearchingIdCon() {
 		SignUp signUp = new SignUp();
 		CashPayment cashPayment = new CashPayment();
 		// 프레임
+		
+		String a = CashPayment.pc_priceString;
 		
 		// 회원 비회원 버튼
 		JToggleButton membtn = new JToggleButton("회 원");
 		f.getContentPane().add(membtn);
 		membtn.setSelected(true); // 처음에 on
 		
-		JToggleButton nonmembtn = new JToggleButton("비회원");
-		f.getContentPane().add(nonmembtn);
-		
-		nonmembtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent args0) {			
-				PcMain_NonMember pcMain2 = new PcMain_NonMember();
-				pcMain2.PcMain2();
-				f.dispose();	
-			}
-		});
-
 		// 가격 버튼
 		JToggleButton pricebtn1 = new JToggleButton("1000");
 		JToggleButton pricebtn2 = new JToggleButton("2000");
@@ -60,8 +56,6 @@ public class PcMain {
 				pricebtn6.setSelected(false);
 				pricebtn7.setSelected(false);
 				pricebtn8.setSelected(false);
-				searchingId = new SearchingId();
-				searchingId.SearchingIdCon();
 				price = 1000;
 			}
 		});
@@ -76,8 +70,6 @@ public class PcMain {
 				pricebtn6.setSelected(false);
 				pricebtn7.setSelected(false);
 				pricebtn8.setSelected(false);
-				searchingId = new SearchingId();
-				searchingId.SearchingIdCon();
 				price = 2000;
 			}
 		});
@@ -91,9 +83,7 @@ public class PcMain {
 				pricebtn5.setSelected(false);
 				pricebtn6.setSelected(false);
 				pricebtn7.setSelected(false);
-				pricebtn8.setSelected(false);		
-				searchingId = new SearchingId();
-				searchingId.SearchingIdCon();
+				pricebtn8.setSelected(false);				
 				price = 3000;
 			}
 		});
@@ -108,8 +98,6 @@ public class PcMain {
 				pricebtn6.setSelected(false);
 				pricebtn7.setSelected(false);
 				pricebtn8.setSelected(false);
-				searchingId = new SearchingId();
-				searchingId.SearchingIdCon();
 				price = 4000;
 			}
 		});
@@ -124,8 +112,6 @@ public class PcMain {
 				pricebtn6.setSelected(false);
 				pricebtn7.setSelected(false);
 				pricebtn8.setSelected(false);
-				searchingId = new SearchingId();
-				searchingId.SearchingIdCon();
 				price = 5000;
 			}
 		});
@@ -140,8 +126,6 @@ public class PcMain {
 				pricebtn6.setSelected(true);
 				pricebtn7.setSelected(false);
 				pricebtn8.setSelected(false);
-				searchingId = new SearchingId();
-				searchingId.SearchingIdCon();
 				price = 10000;
 			}
 		});
@@ -156,8 +140,6 @@ public class PcMain {
 				pricebtn6.setSelected(false);
 				pricebtn7.setSelected(true);
 				pricebtn8.setSelected(false);
-				searchingId = new SearchingId();
-				searchingId.SearchingIdCon();
 				price = 15000;
 			}
 		});
@@ -172,13 +154,28 @@ public class PcMain {
 				pricebtn6.setSelected(false);
 				pricebtn7.setSelected(false);
 				pricebtn8.setSelected(true);
-				searchingId = new SearchingId();
-				searchingId.SearchingIdCon();
 				price = 20000;
 			}
 		});
 		f.getContentPane().add(pricebtn8);
 		
+		if(price==1000) {
+			pricebtn1.setSelected(true);			
+		} else if(price==2000) {
+			pricebtn2.setSelected(true);	
+		} else if(price==3000) {
+				pricebtn3.setSelected(true);
+		} else if(price==4000) {
+			pricebtn4.setSelected(true);
+		} else if(price==5000) {
+			pricebtn5.setSelected(true);
+		} else if(price==10000) {
+			pricebtn6.setSelected(true);
+		} else if(price==15000) {
+			pricebtn7.setSelected(true);
+		} else if(price==20000) {
+			pricebtn8.setSelected(true);
+		}
 		
 		// 결제 수단 버튼
 		JButton seatViewerBtn = new JButton("좌석 보기");
@@ -235,10 +232,8 @@ public class PcMain {
 		f.getContentPane().add(pricebtn8);
 		
 		// 회원 비회원 버튼 옵션
-		membtn.setBounds(15, 10, 214, 40);
+		membtn.setBounds(15, 10, 442, 40);
 		f.getContentPane().add(membtn);
-		nonmembtn.setBounds(241, 10, 216, 40);
-		f.getContentPane().add(nonmembtn);
 		
 		// 결제 수단 버튼 옵션
 		seatViewerBtn.setBounds(482, 41, 195, 91);
@@ -252,19 +247,25 @@ public class PcMain {
 		changeBtn.setBounds(482, 282, 402, 91);
 		f.getContentPane().add(changeBtn);
 		
+		// ID검색 후 정보 
+				SearchingId searchingid = new SearchingId();
+				JLabel searchingIdLabel = new JLabel(searchingid.id);
+				searchingIdLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+				searchingIdLabel.setFont(new Font("굴림", Font.PLAIN, 25));
+				searchingIdLabel.setForeground(Color.BLUE);
+				searchingIdLabel.setBounds(716, 0, 168, 31);
+				f.getContentPane().add(searchingIdLabel);
+				f.setSize(912,	441);
+				
 		
 		// 프레임 옵션
 		f.getContentPane().setLayout(null);
 		f.setSize(912,	441);
 		f.setVisible(true);
 	}
-	
-	public void bbbb() {
-		f.dispose();
-	}
 
 	public static void main(String[] args) {
-		PcMain pc = new PcMain();
-		pc.PcMain();
+		PcMain_AfterSearchingId pc_ASI = new PcMain_AfterSearchingId();
+		pc_ASI.PcMain_AfterSearchingIdCon();
 	}
 } // class

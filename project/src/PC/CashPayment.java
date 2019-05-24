@@ -13,7 +13,10 @@ import javax.swing.JOptionPane;
 
 public class CashPayment {
 	static PcMain pc = new PcMain();
-	static PcMain2 pc2 = new PcMain2();
+	int price = pc.price;
+	static PcMain_NonMember pc2 = new PcMain_NonMember();
+	static SearchingId searchingid = new SearchingId();
+	static String pc_priceString;
 	// 회원 현금 결제
 		public void MemberCashPayment() {
 			
@@ -29,7 +32,7 @@ public class CashPayment {
 			// 선택 금액
 			JLabel selectCashLabel = new JLabel("선택 금액");
 			
-			String pc_priceString = Integer.toString(pc.price);
+			String pc_priceString = Integer.toString(price);
 			JLabel selectCashLabel2 = new JLabel(pc_priceString);
 			
 			f.getContentPane().add(selectCashLabel);
@@ -44,7 +47,7 @@ public class CashPayment {
 			
 			String[] cashType = { "1000", "2000", "3000", "4000", "5000", "10000", "20000" };
 			JComboBox comboBox = new JComboBox(cashType);
-			// comboBox.setSelectedItem(null);
+			
 			f.getContentPane().add(comboBox);
 			String comboBoxSelectedItemString = (String)comboBox.getSelectedItem();
 			
@@ -183,7 +186,6 @@ public class CashPayment {
 		
 		cashPayment.MemberCashPayment();
 		cashPayment.NonMemberCashPayment();
-		
 	}
 }
 

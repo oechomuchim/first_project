@@ -153,7 +153,6 @@ public class SeatDAO {
 		Date to = transFormat.parse(count);
 		
 		//String to boolean(tinyint->int°ª)
-
 		
 		ps.setString(1,seat_num);
 		//ps.setString(2,result);

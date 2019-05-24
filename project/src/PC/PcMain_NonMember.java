@@ -3,23 +3,19 @@ package PC;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
 import javax.swing.JPanel;
 
-public class PcMain {
-	static SeatDTO dto = new SeatDTO();
-	public static int price;
+public class PcMain_NonMember {
+	SeatDTO dto = new SeatDTO();
+	int price;
 	static JFrame f = new JFrame();
-	static ArrayList list = new ArrayList();
-	static SearchingId searchingId;
-
-	public void PcMain() {
+	static SeatView seatview = new SeatView();
+	
+	public void PcMain2() {
 		SignUp signUp = new SignUp();
 		CashPayment cashPayment = new CashPayment();
 		// 프레임
@@ -27,28 +23,36 @@ public class PcMain {
 		// 회원 비회원 버튼
 		JToggleButton membtn = new JToggleButton("회 원");
 		f.getContentPane().add(membtn);
-		membtn.setSelected(true); // 처음에 on
 		
 		JToggleButton nonmembtn = new JToggleButton("비회원");
 		f.getContentPane().add(nonmembtn);
+		nonmembtn.setSelected(true); // 처음에 on
 		
-		nonmembtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent args0) {			
-				PcMain_NonMember pcMain2 = new PcMain_NonMember();
-				pcMain2.PcMain2();
-				f.dispose();	
+		membtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent args0) {
+				PcMain pcMain = new PcMain();
+				pcMain.PcMain();
+				f.dispose();
 			}
 		});
-
+		
+		if(nonmembtn.isSelected()) {
+			membtn.setSelected(false);
+		} else {
+			membtn.setSelected(true);
+		}
+		
 		// 가격 버튼
-		JToggleButton pricebtn1 = new JToggleButton("1000");
-		JToggleButton pricebtn2 = new JToggleButton("2000");
-		JToggleButton pricebtn3 = new JToggleButton("3000");
-		JToggleButton pricebtn4 = new JToggleButton("4000");
-		JToggleButton pricebtn5 = new JToggleButton("5000");
-		JToggleButton pricebtn6 = new JToggleButton("10000");
-		JToggleButton pricebtn7 = new JToggleButton("15000");
-		JToggleButton pricebtn8 = new JToggleButton("20000");
+		JToggleButton pricebtn1 = new JToggleButton("1200");
+		JToggleButton pricebtn2 = new JToggleButton("2200");
+		JToggleButton pricebtn3 = new JToggleButton("3200");
+		JToggleButton pricebtn4 = new JToggleButton("4200");
+		JToggleButton pricebtn5 = new JToggleButton("5200");
+		JToggleButton pricebtn6 = new JToggleButton("10200");
+		JToggleButton pricebtn7 = new JToggleButton("15200");
+		JToggleButton pricebtn8 = new JToggleButton("20200");
+				
+		
 		
 		pricebtn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -60,9 +64,10 @@ public class PcMain {
 				pricebtn6.setSelected(false);
 				pricebtn7.setSelected(false);
 				pricebtn8.setSelected(false);
-				searchingId = new SearchingId();
-				searchingId.SearchingIdCon();
-				price = 1000;
+				price = 1200;
+				seatview.main(null);
+				f.dispose();
+				
 			}
 		});
 		f.getContentPane().add(pricebtn1);
@@ -76,9 +81,8 @@ public class PcMain {
 				pricebtn6.setSelected(false);
 				pricebtn7.setSelected(false);
 				pricebtn8.setSelected(false);
-				searchingId = new SearchingId();
-				searchingId.SearchingIdCon();
-				price = 2000;
+				price = 2200;
+//				seatview.main(null);
 			}
 		});
 		f.getContentPane().add(pricebtn2);
@@ -91,10 +95,8 @@ public class PcMain {
 				pricebtn5.setSelected(false);
 				pricebtn6.setSelected(false);
 				pricebtn7.setSelected(false);
-				pricebtn8.setSelected(false);		
-				searchingId = new SearchingId();
-				searchingId.SearchingIdCon();
-				price = 3000;
+				pricebtn8.setSelected(false);				
+				price = 3200;
 			}
 		});
 		f.getContentPane().add(pricebtn3);
@@ -108,9 +110,7 @@ public class PcMain {
 				pricebtn6.setSelected(false);
 				pricebtn7.setSelected(false);
 				pricebtn8.setSelected(false);
-				searchingId = new SearchingId();
-				searchingId.SearchingIdCon();
-				price = 4000;
+				price = 4200;
 			}
 		});
 		f.getContentPane().add(pricebtn4);
@@ -124,9 +124,7 @@ public class PcMain {
 				pricebtn6.setSelected(false);
 				pricebtn7.setSelected(false);
 				pricebtn8.setSelected(false);
-				searchingId = new SearchingId();
-				searchingId.SearchingIdCon();
-				price = 5000;
+				price = 5200;
 			}
 		});
 		f.getContentPane().add(pricebtn5);
@@ -140,9 +138,7 @@ public class PcMain {
 				pricebtn6.setSelected(true);
 				pricebtn7.setSelected(false);
 				pricebtn8.setSelected(false);
-				searchingId = new SearchingId();
-				searchingId.SearchingIdCon();
-				price = 10000;
+				price = 10200;
 			}
 		});
 		f.getContentPane().add(pricebtn6);
@@ -156,9 +152,7 @@ public class PcMain {
 				pricebtn6.setSelected(false);
 				pricebtn7.setSelected(true);
 				pricebtn8.setSelected(false);
-				searchingId = new SearchingId();
-				searchingId.SearchingIdCon();
-				price = 15000;
+				price = 15200;
 			}
 		});
 		f.getContentPane().add(pricebtn7);
@@ -172,9 +166,7 @@ public class PcMain {
 				pricebtn6.setSelected(false);
 				pricebtn7.setSelected(false);
 				pricebtn8.setSelected(true);
-				searchingId = new SearchingId();
-				searchingId.SearchingIdCon();
-				price = 20000;
+				price = 20200;
 			}
 		});
 		f.getContentPane().add(pricebtn8);
@@ -201,19 +193,12 @@ public class PcMain {
 		JButton cashBtn = new JButton("현금 결제");
 		cashBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cashPayment.MemberCashPayment();
+				cashPayment.NonMemberCashPayment();
 				price=0; 
 			}                
 		});
 		f.getContentPane().add(cashBtn);
 		JButton changeBtn = new JButton("잔돈 반환");
-		changeBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null, "프로그램을 종료합니다");
-				f.dispose();
-			}
-		});
-		
 		f.getContentPane().add(changeBtn);
 		
 		// 가격 버튼 옵션
@@ -258,13 +243,9 @@ public class PcMain {
 		f.setSize(912,	441);
 		f.setVisible(true);
 	}
-	
-	public void bbbb() {
-		f.dispose();
-	}
 
 	public static void main(String[] args) {
-		PcMain pc = new PcMain();
-		pc.PcMain();
+		PcMain_NonMember pc2 = new PcMain_NonMember();
+		pc2.PcMain2();
 	}
 } // class

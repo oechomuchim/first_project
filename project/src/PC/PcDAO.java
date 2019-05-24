@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Vector;
+
+import javax.swing.JTable;
 
 import PC.PcDTO;
 
@@ -40,31 +43,23 @@ public class PcDAO {
 //		}
 	
 	// 아이디 중복 확인
-	public ArrayList IdCheck() {
-		ArrayList list = new ArrayList();
-		
+	public PcDTO IdCheck(PcDTO inputId) {
+		PcDTO dto = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(url, user, password);
-			String sql = "select * from member";
+			String sql = "select * from member where id=?";
 			ps = con.prepareStatement(sql);
-			rs=ps.executeQuery();
-			while (rs.next()) {
-				dto = new PcDTO();
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
 				ps = con.prepareStatement(sql);
 				String id = rs.getString(1);
 				dto.setId(id);
-				
-				list.add(dto);
 			}
-		}catch(
-		Exception e)
-		{
-			System.out.println(e.getMessage());
+		}catch(Exception e) {
 			e.printStackTrace();
-
-		}finally
-		{
+		}finally {
 			try {
 				rs.close(); 
 				ps.close();
@@ -73,7 +68,7 @@ public class PcDAO {
 				System.out.println("자원 해제 중 에러 방생!X/");
 			} 
 		}
-		return list;
+		return dto;
 	}
 	
 	// 회원 가입
@@ -93,4 +88,40 @@ public class PcDAO {
 				e.printStackTrace();
 			}
 		}
+	
+	// 아이디 검색
+	public PcDTO selectId(String inputId) {
+		PcDTO dto = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver"); 
+			con = DriverManager.getConnection(url, user, password); 
+			String sql = "select * from member where id = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, inputId); 
+			rs = ps.executeQuery();
+			
+			if (rs.next()) { 
+				dto = new PcDTO();
+				String id = rs.getString(1);  
+				
+				dto.setId(id);
+			} else {
+			}
+		} catch (Exception e) {
+			System.out.println("DB처리 중 에러 발생!X/");
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				rs.close();   
+				ps.close();
+				con.close();
+			} catch (SQLException e) {
+				System.out.println("자원 해제 중 에러 방생!X/");
+			} // catch
+		} // try - catch - finally
+		return dto;
+	}
+	
 }

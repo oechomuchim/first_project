@@ -20,10 +20,6 @@ public class SignUp {
 	 */
 	static PcMain pc = new PcMain();
 	
-	// 비회원 
-	
-	
-	
 	// 카드 결제
 	public void CardPayment() {
 		JFrame f = new JFrame();
@@ -123,7 +119,7 @@ public class SignUp {
 		JLabel cardPasswordLabel = new JLabel("비밀번호");
 		f.getContentPane().add(cardPasswordLabel);
 		
-		JTextField cardPasswordTextField1 = new JTextField(10);
+		JTextField cardPasswordTextField1 = new JTextField(2);
 		cardPasswordTextField1.setBounds(104, 278, 37, 21);
 		f.getContentPane().add(cardPasswordTextField1);
 		
@@ -137,7 +133,7 @@ public class SignUp {
 		JLabel cardBirthLabel = new JLabel("생년월일");
 		f.getContentPane().add(cardBirthLabel);
 		
-		JTextField cardBirthTextField1 = new JTextField(10);
+		JTextField cardBirthTextField1 = new JTextField(6);
 		cardBirthTextField1.setBounds(104, 333, 57, 21);
 		f.getContentPane().add(cardBirthTextField1);
 		
@@ -167,7 +163,6 @@ public class SignUp {
 		f.setVisible(true);
 	}
 	
-	
 	 //회원가입
 	public void MemberJoin() {
 		JFrame f = new JFrame();
@@ -177,7 +172,6 @@ public class SignUp {
 		PcDAO dao = new PcDAO();
 		PcDTO dto = new PcDTO();
 
-		// 회원가입
 		JLabel signUpLabel = new JLabel("회원 가입");
 		signUpLabel.setFont(new Font("굴림", Font.PLAIN, 18));
 		signUpLabel.setBounds(199, 10, 125, 31);
@@ -193,14 +187,26 @@ public class SignUp {
 		idTextField.setBounds(136, 65, 214, 31);
 
 		// 아이디 중복확인
-		JButton idCheckLabel = new JButton("중복확인");
-		idCheckLabel.setBounds(361, 69, 97, 23);
-		f.getContentPane().add(idCheckLabel);
+		JButton idCheckBtn = new JButton("중복확인");
+		idCheckBtn.setBounds(361, 69, 97, 23);
+		f.getContentPane().add(idCheckBtn);
+		
+		idCheckBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				String inputId = idTextField.getText(); // 입력한 아이디를 string값으로 저장
+				
+				PcDTO dto = dao.selectId(inputId); // dto에 dao로 찾은 db에저장된 아이디값 저장
+				String id = dto.getId(); // selectid로 dto에 setid해놓은 id값을 다시 getid로 불러옴 = id는 db에 저장된 id!
 
-		if (dao.IdCheck().equals(idTextField.getText())) {
-			System.out.println("중복!");
-			idTextField.setText("");
-		}
+			if (inputId.equals(id)) {
+				JOptionPane.showMessageDialog(null, "중복입니다 다시 입력해주세요");
+				idTextField.setText("");
+			} else {
+				JOptionPane.showMessageDialog(null, "사용가능한 아이디 입니다:)");
+			}
+		  }
+		});
 
 		// 비밀번호 입력
 		JLabel pwLabel = new JLabel("*비밀번호");
@@ -219,19 +225,13 @@ public class SignUp {
 		f.getContentPane().add(pwLabel2);
 		f.getContentPane().add(pwTextField2);
 
-		if (!pwTextField2.getText().equals(pwTextField.getText())) { // 비밀번호와 재확인이 다르다면 글자색 변경
-			pwTextField2.setForeground(new Color(255, 0, 0));
-		} else {
-			pwTextField2.setForeground(new Color(0, 0, 0));
-		}
-
 		pwLabel2.setBounds(32, 156, 105, 40);
 		pwTextField2.setBounds(136, 161, 214, 31);
 
 		// 휴대폰 번호 입력
 		JLabel telLabel = new JLabel("*휴대폰 번호");
 		f.getContentPane().add(telLabel);
-		JTextField telTextField = new JTextField(10);
+		JTextField telTextField = new JTextField(11);
 		f.getContentPane().add(telTextField);
 
 		telTextField.setBounds(136, 261, 214, 31);
@@ -240,7 +240,7 @@ public class SignUp {
 		// 생년월일 입력
 		JLabel birthLabel = new JLabel("*생년월일");
 		f.getContentPane().add(birthLabel);
-		JTextField birthTextField = new JTextField(10);
+		JTextField birthTextField = new JTextField(6);
 		f.getContentPane().add(birthTextField);
 
 		birthTextField.setBounds(136, 312, 214, 31);
@@ -266,24 +266,33 @@ public class SignUp {
 		JButton completeBtn = new JButton("가입");
 		completeBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				 if (idTextField.getText().equals("")&&pwTextField.getText().equals("")&&pwTextField2.getText().equals("")
+						 &&telTextField.getText().equals("")&&birthTextField.getText().equals("")) {
+						JOptionPane.showMessageDialog(null, "정보를 입력해주세요");
+						
+						
+//						if(!pwTextField2.getText().equals(pwTextField.getText())) {
+//							JOptionPane.showMessageDialog(null, "비밀번호가 다릅니다. 다시 입력해주세요");
+//							pwTextField2.setText("");
+//						}
+				} else {
+					String id = idTextField.getText();
+					String pw = pwTextField.getText();
+					String tel = telTextField.getText();
+					String birth = birthTextField.getText();
+					String name = nameTextField.getText();
 
-				String id = idTextField.getText();
-				String pw = pwTextField.getText();
-				String tel = telTextField.getText();
-				String birth = birthTextField.getText();
-				String name = nameTextField.getText();
+					dto.setId(id);
+					dto.setPw(pw);
+					dto.setTel(tel);
+					dto.setBirth(birth);
+					dto.setName(name);
 
-				dto.setId(id);
-				dto.setPw(pw);
-				dto.setTel(tel);
-				dto.setBirth(birth);
-				dto.setName(name);
-
-				dao.insert(dto);
-				
-				JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다");
-
-				f.dispose();
+					dao.insert(dto);
+					
+					JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다");
+					f.dispose();
+			   }
 			}
 		});
 		completeBtn.setBounds(193, 402, 97, 23);
